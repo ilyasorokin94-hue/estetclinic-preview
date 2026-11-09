@@ -677,9 +677,9 @@ d.querySelectorAll('.vh3-t').forEach(function(b){b.addEventListener('click',func
 <label class="zp-l" for="zp-name">Как к вам обращаться</label><input type="text" id="zp-name" name="name" autocomplete="given-name" placeholder="Имя">
 <label class="zp-l" for="zp-phone">Телефон</label><input type="tel" id="zp-phone" name="phone" autocomplete="tel" placeholder="+7 (___) ___-__-__">
 <label class="zp-ok"><input type="checkbox" name="ok"><span>Даю <a href="soglasie-na-obrabotku-personalnyh-dannyh.html" style="color:#006028">согласие на&nbsp;обработку персональных данных</a></span></label>
-<button type="submit" class="zp-btn">Жду звонка</button>
+<button type="submit" class="zp-btn">Отправить через WhatsApp</button>
 </form>
-<div class="zp-done"><i><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg></i><h3>Спасибо, мы вам&nbsp;перезвоним</h3><p class="zp-sub" style="margin:0">Администратор подберёт удобное время приёма. <span style="white-space:nowrap">Пн–Пт 10:00–20:00</span>.</p></div>
+<div class="zp-done"><i><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg></i><h3>Осталось нажать «Отправить» в&nbsp;WhatsApp</h3><p class="zp-sub" style="margin:0">Мы открыли чат клиники с&nbsp;готовой заявкой. Если WhatsApp не&nbsp;открылся, <a class="zp-wa" href="https://wa.me/79510665517" target="_blank" rel="noopener" style="color:#006028;font-weight:600">откройте его здесь</a> или позвоните: <a href="tel:+78432376534" style="color:#006028;font-weight:600;white-space:nowrap">8&nbsp;(843)&nbsp;237-65-34</a>, <a href="tel:+79510665517" style="color:#006028;font-weight:600;white-space:nowrap">+7&nbsp;(951)&nbsp;066-55-17</a>. <span style="white-space:nowrap">Пн–Пт 10:00–20:00</span>.</p></div>
 </div></div>
 <script>
 document.documentElement.classList.add('rv-on');
@@ -696,7 +696,7 @@ document.addEventListener('keydown',function(e){if(e.key==='Escape'&&ov.classLis
 function mask(ph){var d=ph.value.replace(/\D/g,'');if(d[0]==='8'||d[0]==='7')d=d.slice(1);d=d.slice(0,10);var s='+7';if(d.length)s+=' ('+d.slice(0,3);if(d.length>=3)s+=')';if(d.length>3)s+=' '+d.slice(3,6);if(d.length>6)s+='-'+d.slice(6,8);if(d.length>8)s+='-'+d.slice(8,10);ph.value=s;ph.classList.remove('zp-err');}
 document.querySelectorAll('input[type=tel]').forEach(function(i){i.addEventListener('input',function(){mask(i)});});
 f.addEventListener('submit',function(e){e.preventDefault();if(ph.value.replace(/\D/g,'').length<11){ph.classList.add('zp-err');ph.focus();return;}var ok=f.querySelector('[name=ok]');if(ok&&!ok.checked){ok.parentNode.classList.add('zp-err');ok.onchange=function(){ok.parentNode.classList.remove('zp-err')};return;}
-/* TODO: отправка заявки (Telegram/почта) подключается при запуске сайта */ box.classList.add('sent');});
+var nm=(f.querySelector('[name=name]')||{}).value||'',hh=document.querySelector('h1'),t='Здравствуйте! Хочу записаться на консультацию.\nИмя: '+nm.trim()+'\nТелефон: '+ph.value+(hh&&!/^index|^$/.test(location.pathname.split('/').pop())?'\nСтраница: '+hh.textContent.replace(/\s+/g,' ').trim():''),u='https://wa.me/79510665517?text='+encodeURIComponent(t);var w=window.open(u,'_blank');if(!w)location.href=u;var dl=box.querySelector('.zp-wa');if(dl)dl.href=u;box.classList.add('sent');});
 document.querySelectorAll('a[href^="#"]').forEach(function(a){var h=a.getAttribute('href');if(h.length>1&&!a.hasAttribute('data-zapis'))a.addEventListener('click',function(e){var t=document.querySelector(h);if(t&&getComputedStyle(t).display==='contents')t=t.firstElementChild;if(t){e.preventDefault();t.scrollIntoView({behavior:'smooth'});}});});
 })();
 
